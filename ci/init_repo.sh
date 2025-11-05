@@ -3,10 +3,13 @@
 # Example: ci/init_repo.sh https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git android-15.0 ~/twrp 8
 
 set -euo pipefail
+set -o errtrace
+
 MANIFEST_URL="${1:-}"
 DESIRED="${2:-}"
 WORKDIR="${3:-$HOME/twrp}"
 JOBS="${4:-8}"
+# Allow caller to provide REPO_BIN (full path) or default to $HOME/bin/repo
 REPO_BIN="${REPO_BIN:-$HOME/bin/repo}"
 
 if [[ -z "$MANIFEST_URL" ]]; then
@@ -14,16 +17,38 @@ if [[ -z "$MANIFEST_URL" ]]; then
   exit 2
 fi
 
+# Expand tilde if present and ensure absolute path for WORKDIR
+WORKDIR="${WORKDIR/#\~/$HOME}"
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
-# Ensure repo tool present
-if ! command -v "$REPO_BIN" >/dev/null 2>&1; then
-  echo "repo tool not found at $REPO_BIN — installing to $HOME/bin/repo"
+echo "ci/init_repo.sh: starting in $(pwd)"
+echo "Manifest: $MANIFEST_URL"
+echo "Desired branch: ${DESIRED:-<auto>}"
+echo "Workdir: $WORKDIR"
+echo "Jobs: $JOBS"
+echo "REPO_BIN: $REPO_BIN"
+
+# Ensure repo tool present: prefer a usable REPO_BIN if it's executable, otherwise try 'repo' in PATH
+repo_cmd=""
+if [[ -x "$REPO_BIN" ]]; then
+  repo_cmd="$REPO_BIN"
+elif command -v repo >/dev/null 2>&1; then
+  repo_cmd="$(command -v repo)"
+else
+  echo "repo tool not found; installing to $REPO_BIN"
   mkdir -p "$(dirname "$REPO_BIN")"
   curl -fsSL "https://storage.googleapis.com/git-repo-downloads/repo" -o "$REPO_BIN"
   chmod +x "$REPO_BIN"
+  repo_cmd="$REPO_BIN"
 fi
+
+if [[ -z "$repo_cmd" ]]; then
+  echo "ERROR: could not determine repo command; aborting"
+  exit 4
+fi
+
+echo "Using repo command at: $repo_cmd"
 
 # Make sure git can reach the manifest
 echo "Querying available branches from manifest repo: $MANIFEST_URL"
@@ -31,11 +56,11 @@ mapfile -t branches < <(git ls-remote --heads --refs "$MANIFEST_URL" 2>/dev/null
 
 if [[ ${#branches[@]} -eq 0 ]]; then
   echo "ERROR: Could not list branches from $MANIFEST_URL"
-  echo "Check network access, repo URL and that the repository exists. Aborting."
+  echo "Check network access, manifest URL and that the repository exists. Aborting."
   exit 3
 fi
 
-echo "Available branches:"
+echo "Available branches from manifest:"
 for b in "${branches[@]}"; do echo "  $b"; done
 
 pick_branch() {
@@ -81,7 +106,7 @@ pick_branch() {
 BRANCH="$(pick_branch "$DESIRED")"
 echo "Using manifest branch: $BRANCH"
 
-# Some environments reuse an existing .repo; remove or re-init depending on desired behavior
+# Remove existing .repo to avoid partial state (explicit and safe)
 if [[ -d .repo ]]; then
   echo "Removing existing .repo to avoid partial state"
   rm -rf .repo
@@ -89,12 +114,12 @@ fi
 
 # Repo init + sync with retry for transient network errors
 echo "Running repo init -u $MANIFEST_URL -b $BRANCH"
-"$REPO_BIN" init --depth=1 -u "$MANIFEST_URL" -b "$BRANCH" || { echo "repo init failed"; exit 4; }
+"$repo_cmd" init --depth=1 -u "$MANIFEST_URL" -b "$BRANCH" || { echo "repo init failed"; exit 4; }
 
 MAX_ATTEMPTS=5
 for attempt in $(seq 1 $MAX_ATTEMPTS); do
   echo "repo sync attempt $attempt/$MAX_ATTEMPTS"
-  if "$REPO_BIN" sync -c -j"$JOBS" --force-sync --no-clone-bundle --no-tags --fail-fast; then
+  if "$repo_cmd" sync -c -j"$JOBS" --force-sync --no-clone-bundle --no-tags --fail-fast; then
     echo "repo sync succeeded"
     exit 0
   fi
