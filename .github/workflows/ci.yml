@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Optional: If you prefer to set executable bit in the workflow instead of in-repo
+      - name: Ensure init script is present and executable
+        run: |
+          if [ ! -f ./ci/init_repo.sh ]; then
+            echo "ERROR: ./ci/init_repo.sh not found"
+            ls -la
+            exit 1
+          fi
+          chmod +x ./ci/init_repo.sh
+
+      - name: Run init script
+        run: ./ci/init_repo.sh
