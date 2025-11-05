@@ -1,0 +1,43 @@
+name: CI - Init Repo and Sync
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  init-and-sync:
+    runs-on: ubuntu-latest
+    env:
+      DEVICE: kansas
+      VENDOR: motorola
+      MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup environment diagnostics
+        run: |
+          echo "=== Workspace Diagnostics ==="
+          echo "PWD: $(pwd)"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "Listing repo root"
+          ls -la .
+          echo "--- ci dir ---"
+          if [ -d ci ]; then ls -la ci; else echo "ci directory not present"; fi
+          echo "=== End diagnostics ==="
+
+      - name: Ensure script exists, make executable and run
+        shell: bash
+        run: |
+          SCRIPT_PATH="ci/init_repo.sh"
+          if [ ! -f "$SCRIPT_PATH" ]; then
+            echo "ERROR: $SCRIPT_PATH not found in repository root; aborting"
+            exit 1
+          fi
+          chmod +x "$SCRIPT_PATH"
+          echo "Running $SCRIPT_PATH with manifest: $MANIFEST"
+          ./ci/init_repo.sh "$MANIFEST" "android-14.0" "$HOME/twrp" "$(nproc --all)"
