@@ -1,0 +1,76 @@
+# Vendor Properties for Motorola Kansas
+
+# Brand
+ro.product.vendor.brand=motorola
+ro.product.vendor.device=kansas
+ro.product.vendor.manufacturer=motorola
+ro.product.vendor.model=kansas
+ro.product.vendor.name=kansas_g_sys
+
+# Bootloader
+ro.bootloader=unknown
+
+# Platform
+ro.hardware=mt6835
+ro.board.platform=mt6835
+
+# Camera
+ro.camera.hfr.enable=1
+ro.camera.relight.enable=0
+ro.camera.attr.detect.enable=1
+
+# Crypto
+ro.crypto.state=encrypted
+ro.crypto.type=file
+ro.crypto.volume.filenames_mode=aes-256-cts
+
+# DRM
+drm.service.enabled=true
+
+# FRP
+ro.frp.pst=/dev/block/by-name/frp
+
+# Graphics
+ro.hardware.egl=meow
+ro.hardware.vulkan=mali
+ro.opengles.version=196610
+
+# Keymaster
+ro.hardware.kmsetkey=trustonic
+ro.hardware.gatekeeper=trustonic
+
+# Media
+media.stagefright.thumbnail.prefer_hw_codecs=true
+vendor.mtk.vdec.waitkeyframeforplay=9
+
+# Radio
+persist.vendor.radio.apm_sim_not_pwdn=1
+persist.vendor.radio.custom_ecc=1
+persist.vendor.radio.rat_on=combine
+persist.vendor.radio.sib16_support=1
+
+# Wi-Fi
+wifi.interface=wlan0
+ro.mediatek.wlan.wsc=1
+ro.mediatek.wlan.p2p=1
+mediatek.wlan.ctia=0
+
+# Mediatek
+ro.vendor.mediatek.platform=MT6835
+ro.vendor.mediatek.version.branch=alps-mp-u0.mssi1.tc16sp-mt6835
+ro.vendor.mgk_name=mgk_64_k515
+
+# SPU
+vendor.spusvc=on
+
+# TEE
+ro.vendor.mtk_tee_gp_support=1
+ro.hardware.wechat=sec
+
+# Audio
+ro.vendor.mtk_audio_alac_support=1
+ro.vendor.mtk_audio_ape_support=1
+ro.vendor.mtk_audio_tuning_tool_ver=V2.2
+
+# Bootanim
+ro.bootanim.set_color_mode=1

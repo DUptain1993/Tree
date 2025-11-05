@@ -1,0 +1,10 @@
+COMPLETE FILE LIST - MOTOROLA KANSAS DEVICE TREE
+=================================================
+
+$(find TREE/motorola/kansas -type f | sort | sed 's|TREE/motorola/kansas/||' | nl -w3 -s'. ')
+
+Total Files: $(find TREE/motorola/kansas -type f | wc -l)
+Total Directories: $(find TREE/motorola/kansas -type d | wc -l)
+Total Size: $(du -sh TREE/motorola/kansas | cut -f1)
+
+Generated: $(date)

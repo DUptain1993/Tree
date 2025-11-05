@@ -1,0 +1,40 @@
+# System Properties for Motorola Kansas
+
+# Device
+ro.product.system.brand=motorola
+ro.product.system.device=kansas
+ro.product.system.manufacturer=motorola
+ro.product.system.model=moto g - 2025
+ro.product.system.name=kansas_g_sys
+
+# Fingerprint
+ro.build.fingerprint=motorola/kansas_g_sys/kansas:15/V1VK35.22-125/06468-7f0382:user/release-keys
+
+# MediaTek Platform
+ro.soc.manufacturer=mtk
+ro.soc.model=mt6835
+
+# Performance
+ro.config.low_ram=false
+ro.config.zram=true
+
+# Display
+ro.sf.lcd_density=280
+
+# Dalvik
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heapgrowthlimit=192m
+dalvik.vm.heapsize=512m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapmaxfree=8m
+
+# Audio
+ro.camera.sound.forced=0
+ro.audio.silent=0
+
+# USB
+persist.sys.usb.config=mtp,adb
+
+# Recovery
+persist.sys.binary_xml=false

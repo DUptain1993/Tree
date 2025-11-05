@@ -1,0 +1,44 @@
+# Mount point           FS      Device                          Flags
+
+# Boot partitions
+/boot                   emmc    /dev/block/by-name/boot_a       flags=slotselect;display="Boot";backup=1;flashimg=1
+/init_boot              emmc    /dev/block/by-name/init_boot_a  flags=slotselect;display="Init Boot";backup=1;flashimg=1
+/vendor_boot            emmc    /dev/block/by-name/vendor_boot_a flags=slotselect;display="Vendor Boot";backup=1;flashimg=1
+/dtbo                   emmc    /dev/block/by-name/dtbo_a       flags=slotselect;display="DTBO";backup=1;flashimg=1
+
+# Data and Metadata
+/metadata               f2fs    /dev/block/by-name/metadata     flags=display="Metadata";wrappedkey
+/data                   f2fs    /dev/block/by-name/userdata     flags=fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized+wrappedkey_v0;wrappedkey;keydirectory=/metadata/vold/metadata_encryption
+
+# Persistent partitions
+/persist                ext4    /dev/block/by-name/persist      flags=display="Persist"
+/prodpersist            ext4    /dev/block/by-name/prodpersist  flags=display="Product Persist"
+
+# Vendor partitions
+/protect_f              ext4    /dev/block/by-name/protect1     flags=display="Protect F"
+/protect_s              ext4    /dev/block/by-name/protect2     flags=display="Protect S"
+/nvdata                 ext4    /dev/block/by-name/nvdata       flags=display="NV Data"
+/nvcfg                  ext4    /dev/block/by-name/nvcfg        flags=display="NV Config"
+
+# Firmware partitions
+/vbmeta                 emmc    /dev/block/by-name/vbmeta_a     flags=slotselect;display="VBMeta";backup=1;flashimg=1
+/vbmeta_system          emmc    /dev/block/by-name/vbmeta_system_a flags=slotselect;display="VBMeta System";backup=1;flashimg=1
+/logo                   emmc    /dev/block/by-name/logo_a       flags=slotselect;display="Logo";backup=1;flashimg=1
+
+# Bootloader
+/lk                     emmc    /dev/block/by-name/lk_a         flags=slotselect;display="Bootloader";backup=1;flashimg=1
+
+# Modem
+/md1img                 emmc    /dev/block/by-name/md1img_a     flags=slotselect;display="Modem";backup=1;flashimg=1
+
+# EFS
+/nvram                  emmc    /dev/block/by-name/nvram        flags=display="NVRAM";backup=1;flashimg=1
+/proinfo                emmc    /dev/block/by-name/proinfo      flags=display="Proinfo";backup=1;flashimg=1
+
+# Misc
+/misc                   emmc    /dev/block/by-name/misc         flags=display="Misc"
+/boot_para              emmc    /dev/block/by-name/boot_para    flags=display="Boot Para"
+
+# Removable storage
+/external_sd            auto    /dev/block/mmcblk1p1            flags=display="MicroSD";storage;wipeingui;removable
+/usb_otg                auto    /dev/block/sda1                 flags=display="USB OTG";storage;wipeingui;removable

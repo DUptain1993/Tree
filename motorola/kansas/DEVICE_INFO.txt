@@ -1,0 +1,205 @@
+================================================================================
+            MOTOROLA MOTO G - 2025 (KANSAS) - DEVICE INFORMATION
+================================================================================
+
+GENERAL INFORMATION
+-------------------
+Manufacturer:       Motorola
+Device Name:        Moto G - 2025
+Device Codename:    kansas
+Model Number:       moto g - 2025
+Board:              kansas
+Platform:           mt6835
+
+SYSTEM INFORMATION
+------------------
+Android Version:    15
+API Level:          35
+Security Patch:     2025-06-01
+Build Fingerprint:  motorola/kansas_g_sys/kansas:15/V1VK35.22-125/06468-7f0382:user/release-keys
+Build ID:           V1VK35.22-125
+
+HARDWARE INFORMATION
+--------------------
+SoC:                MediaTek MT6835
+CPU:                ARM Cortex-A55 (ARMv8.2-A)
+CPU Architecture:   aarch64
+CPU Implementer:    0x41 (ARM)
+CPU Part:           0xd05 (Cortex-A55)
+CPU Variant:        0x2
+CPU Cores:          8 cores (assumed)
+GPU:                Mali-G57
+
+MEMORY & STORAGE
+----------------
+RAM:                4GB (3728656 KB)
+Total Storage:      128GB (approximate)
+System Storage:     eMMC/UFS
+
+DISPLAY
+-------
+LCD Density:        280 DPI
+
+KERNEL INFORMATION
+------------------
+Kernel Version:     5.15.167
+Kernel Build:       Linux 5.15.167-android13-8-00008-g31975b884c4b-ab13216403
+Compiler:           Android Clang 14.0.7
+Compiler Path:      https://android.googlesource.com/toolchain/llvm-project
+Compiler Version:   4c603efb0cca074e9238af8b4106c30add4418f6
+
+PARTITION SCHEME
+----------------
+Partition Style:    GPT (GUID Partition Table)
+A/B Partitioning:   Yes (Seamless Updates)
+Dynamic Partitions: Yes (Super partition)
+
+STORAGE PARTITIONS
+------------------
+Block Device:       /dev/block/sdc (main storage)
+Total Blocks:       124960768 (approx 119GB)
+
+BOOT PARTITIONS (A/B Slots)
+---------------------------
+boot_a/boot_b:          65536 blocks (64 MB each)
+init_boot_a/init_boot_b: 8192 blocks (8 MB each)
+vendor_boot_a/vendor_boot_b: 65536 blocks (64 MB each)
+dtbo_a/dtbo_b:          8192 blocks (8 MB each)
+vbmeta_a/vbmeta_b:      8192 blocks (8 MB each)
+vbmeta_system_a/vbmeta_system_b: 8192 blocks (8 MB each)
+
+SYSTEM PARTITIONS
+-----------------
+super:              8159232 blocks (~8 GB - contains all logical partitions)
+  - system          (logical, erofs/ext4)
+  - system_ext      (logical, erofs/ext4)
+  - product         (logical, erofs/ext4)
+  - vendor          (logical, erofs/ext4)
+  - vendor_dlkm     (logical, erofs/ext4)
+  - odm             (logical, erofs/ext4)
+
+DATA PARTITIONS
+---------------
+userdata:           114900960 blocks (~110 GB)
+metadata:           65536 blocks (64 MB)
+
+PERSISTENT PARTITIONS
+---------------------
+persist:            49152 blocks (48 MB)
+prodpersist:        8192 blocks (8 MB)
+nvdata:             65536 blocks (64 MB)
+nvcfg:              32768 blocks (32 MB)
+protect1:           8192 blocks (8 MB)
+protect2:           8192 blocks (8 MB)
+
+FIRMWARE PARTITIONS
+-------------------
+lk_a/lk_b:          16384 blocks (16 MB each) [Little Kernel Bootloader]
+logo_a/logo_b:      16384 blocks (16 MB each)
+tee_a/tee_b:        5120 blocks (5 MB each) [Trusted Execution Environment]
+scp_a/scp_b:        6144 blocks (6 MB each) [System Control Processor]
+sspm_a/sspm_b:      1024 blocks (1 MB each) [System Power Management]
+dpm_a/dpm_b:        4096 blocks (4 MB each) [Digital Power Management]
+mcupm_a/mcupm_b:    1024 blocks (1 MB each) [MCU Power Management]
+gz_a/gz_b:          32768 blocks (32 MB each) [Gatekeeper Zone]
+spmfw_a/spmfw_b:    32768 blocks (32 MB each) [SPM Firmware]
+md1img_a/md1img_b:  204800 blocks (200 MB each) [Modem Image]
+vcp_a/vcp_b:        6144 blocks (6 MB each) [Video Core Processor]
+
+CONNECTIVITY PARTITIONS
+-----------------------
+connsys_wifi_a/connsys_wifi_b: 8192 blocks (8 MB each)
+connsys_bt_a/connsys_bt_b:     8192 blocks (8 MB each)
+connsys_gnss_a/connsys_gnss_b: 8192 blocks (8 MB each)
+
+MISC PARTITIONS
+---------------
+misc:               512 blocks (512 KB)
+nvram:              65536 blocks (64 MB)
+frp:                1024 blocks (1 MB) [Factory Reset Protection]
+proinfo:            3072 blocks (3 MB)
+boot_para:          1024 blocks (1 MB)
+expdb:              131072 blocks (128 MB)
+seccfg:             512 blocks (512 KB)
+otp:                44032 blocks (43 MB)
+logks:              65536 blocks (64 MB)
+logs:               8192 blocks (8 MB)
+carrier:            16384 blocks (16 MB)
+hw:                 8192 blocks (8 MB)
+pstore:             131072 blocks (128 MB)
+flashinfo:          16384 blocks (16 MB)
+
+ENCRYPTION
+----------
+Type:               File-based Encryption (FBE)
+Algorithm:          AES-256-XTS:AES-256-CTS:v2
+Metadata Encryption: Yes (AES-256-XTS)
+Inline Encryption:  Yes (inlinecrypt_optimized)
+Wrapped Key:        Yes (wrappedkey_v0)
+Key Directory:      /metadata/vold/metadata_encryption
+
+VERIFIED BOOT
+-------------
+AVB Version:        2.0
+VBMeta:             Enabled
+System VBMeta:      Separate partition
+Rollback Index:     Based on security patch
+
+FILE SYSTEMS
+------------
+System:             EROFS/EXT4 (read-only)
+Vendor:             EROFS/EXT4 (read-only)
+Product:            EROFS/EXT4 (read-only)
+Userdata:           F2FS (read-write)
+Metadata:           F2FS
+Cache:              N/A (A/B devices don't use cache)
+
+HARDWARE ABSTRACTION LAYER (HAL)
+---------------------------------
+Keymaster:          4.0 (Trustonic)
+Gatekeeper:         1.0 (Trustonic)
+Boot Control:       1.2
+Health:             2.1
+Graphics:           Mali (EGL: meow, Vulkan: mali)
+Audio:              MTK Audio HAL
+
+MOTOROLA SPECIFIC
+-----------------
+SPU Service:        Enabled
+TEE:                Trustonic (GP Support)
+Audio Support:      ALAC, APE
+Audio Tuning:       V2.2
+
+BUILD CONFIGURATION
+-------------------
+Build Type:         user
+Build Variant:      release-keys
+Build Date:         2025 (approximate)
+Signing:            Release keys
+
+RECOVERY MODE
+-------------
+Recovery Support:   TWRP Compatible
+Fastboot:           Supported
+Fastbootd:          Supported (for dynamic partitions)
+
+USB CONFIGURATION
+-----------------
+USB Controller:     11201000.usb0 (11200000.xhci)
+ConfigFS:           Enabled
+Default Config:     MTP + ADB
+
+ADDITIONAL FEATURES
+-------------------
+- Seamless A/B System Updates
+- Dynamic Partition Support
+- File-based Encryption with Metadata Encryption
+- AVB 2.0 Verified Boot
+- Inline Hardware Encryption
+- Trustonic TEE (Trusted Execution Environment)
+- MediaTek Power Management (MCU, SCP, SSPM, DPM)
+- Multiple Connectivity Subsystems (Wi-Fi, Bluetooth, GNSS)
+
+================================================================================
+                    Device Tree Generated: 2025-11-04
+================================================================================

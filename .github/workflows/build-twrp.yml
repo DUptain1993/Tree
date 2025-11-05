@@ -1,0 +1,158 @@
+name: Build TWRP Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      MANIFEST_BRANCH:
+        description: 'TWRP Manifest Branch'
+        required: true
+        default: 'android-14.0'
+        type: choice
+        options:
+          - android-14.0
+          - android-15.0
+          - twrp-12.1
+          - twrp-11
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'main'
+      BUILD_TARGET:
+        description: 'Build Target'
+        required: true
+        default: 'recoveryimage'
+        type: choice
+        options:
+          - recoveryimage
+          - bootimage
+
+jobs:
+  build:
+    name: Build TWRP for Motorola Kansas
+    runs-on: ubuntu-22.04
+
+    env:
+      DEVICE: kansas
+      VENDOR: motorola
+      MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git
+
+    steps:
+      - name: Checkout Device Tree
+        uses: actions/checkout@v4
+        with:
+          path: device-tree
+
+      - name: Cleanup Space
+        run: |
+          echo "Available space before cleanup:"
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          echo "Available space after cleanup:"
+          df -h
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            bc bison build-essential ccache curl flex \
+            g++-multilib gcc-multilib git gnupg gperf \
+            imagemagick lib32ncurses5-dev lib32readline-dev \
+            lib32z1-dev libelf-dev liblz4-tool \
+            libncurses5 libncurses5-dev libsdl1.2-dev \
+            libssl-dev libxml2 libxml2-utils lzop \
+            pngcrush rsync schedtool squashfs-tools xsltproc \
+            zip zlib1g-dev python3 python-is-python3 \
+            openjdk-11-jdk adb fastboot
+
+      - name: Setup Repo Tool
+        run: |
+          mkdir -p ~/bin
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+x ~/bin/repo
+          echo "$HOME/bin" >> $GITHUB_PATH
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Initialize TWRP Repo
+        run: |
+          mkdir -p ~/twrp
+          cd ~/twrp
+          repo init --depth=1 -u ${{ env.MANIFEST }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+
+      - name: Sync TWRP Source
+        run: |
+          cd ~/twrp
+          repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+
+      - name: Clone Device Tree
+        run: |
+          mkdir -p ~/twrp/device/${{ env.VENDOR }}/${{ env.DEVICE }}
+          cp -r $GITHUB_WORKSPACE/device-tree/motorola/kansas/* ~/twrp/device/${{ env.VENDOR }}/${{ env.DEVICE }}/
+          ls -la ~/twrp/device/${{ env.VENDOR }}/${{ env.DEVICE }}/
+
+      - name: Setup Build Environment
+        run: |
+          cd ~/twrp
+          source build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          export LC_ALL=C
+
+      - name: Build Recovery
+        run: |
+          cd ~/twrp
+          source build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          export LC_ALL=C
+          lunch twrp_${{ env.DEVICE }}-eng
+          mka ${{ github.event.inputs.BUILD_TARGET }}
+
+      - name: Check Build Output
+        run: |
+          cd ~/twrp
+          echo "Checking for recovery image..."
+          if [ -f out/target/product/${{ env.DEVICE }}/recovery.img ]; then
+            echo "Recovery image built successfully!"
+            ls -lh out/target/product/${{ env.DEVICE }}/recovery.img
+          else
+            echo "Recovery image not found!"
+            ls -la out/target/product/${{ env.DEVICE }}/ || echo "Output directory not found"
+          fi
+
+      - name: Upload Recovery Image
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: twrp-recovery-${{ env.DEVICE }}-${{ github.run_number }}
+          path: |
+            ~/twrp/out/target/product/${{ env.DEVICE }}/recovery.img
+            ~/twrp/out/target/product/${{ env.DEVICE }}/ramdisk-recovery.cpio
+            ~/twrp/out/target/product/${{ env.DEVICE }}/*.zip
+          if-no-files-found: warn
+
+      - name: Create Release Info
+        if: success()
+        run: |
+          cd ~/twrp/out/target/product/${{ env.DEVICE }}
+          echo "TWRP Recovery Build Information" > build-info.txt
+          echo "================================" >> build-info.txt
+          echo "Device: ${{ env.DEVICE }}" >> build-info.txt
+          echo "Vendor: ${{ env.VENDOR }}" >> build-info.txt
+          echo "TWRP Branch: ${{ github.event.inputs.MANIFEST_BRANCH }}" >> build-info.txt
+          echo "Build Date: $(date)" >> build-info.txt
+          echo "Build Number: ${{ github.run_number }}" >> build-info.txt
+          if [ -f recovery.img ]; then
+            echo "Recovery Size: $(ls -lh recovery.img | awk '{print $5}')" >> build-info.txt
+            echo "Recovery MD5: $(md5sum recovery.img | awk '{print $1}')" >> build-info.txt
+          fi
+          cat build-info.txt
+
+      - name: Upload Build Info
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-info-${{ github.run_number }}
+          path: ~/twrp/out/target/product/${{ env.DEVICE }}/build-info.txt
+          if-no-files-found: warn

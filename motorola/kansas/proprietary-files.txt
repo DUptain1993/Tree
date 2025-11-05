@@ -1,0 +1,18 @@
+# Proprietary files for Motorola Kansas
+
+# Keymaster
+vendor/lib64/hw/android.hardware.keymaster@4.0-impl.so
+vendor/lib64/libkeymaster4.so
+vendor/lib64/libkeymaster_messages.so
+vendor/lib64/libkeymaster_portable.so
+vendor/lib64/libpuresoftkeymasterdevice.so
+
+# Gatekeeper
+vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
+vendor/lib64/libgatekeeper.so
+
+# Boot Control
+vendor/lib64/hw/android.hardware.boot@1.2-impl.so
+
+# Firmware
+vendor/firmware/

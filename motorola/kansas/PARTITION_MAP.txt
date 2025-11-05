@@ -1,0 +1,156 @@
+================================================================================
+          MOTOROLA MOTO G - 2025 (KANSAS) - COMPLETE PARTITION MAP
+================================================================================
+
+BLOCK DEVICE: /dev/block/sdc (Main eMMC/UFS Storage)
+Total Size: ~119 GB (124960768 blocks)
+
+Partition Layout:
+-----------------
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Partition Number │ Name              │ Device      │ Size (Blocks) │ ~MB │
+├─────────────────────────────────────────────────────────────────────────┤
+│ sdc1             │ misc              │ 259:0       │ 512           │ <1  │
+│ sdc2             │ para              │ 259:0       │ 512           │ <1  │
+│ sdc3             │ expdb             │ 259:0       │ 131072        │ 128 │
+│ sdc4             │ frp               │ 259:0       │ 1024          │ 1   │
+│ sdc5             │ nvram             │ 259:0       │ 65536         │ 64  │
+│ sdc6             │ nvcfg             │ 259:0       │ 32768         │ 32  │
+│ sdc7             │ nvdata            │ 259:0       │ 65536         │ 64  │
+│ sdc8             │ cid               │ 259:0       │ 128           │ <1  │
+│ sdc9             │ utags             │ 259:0       │ 512           │ <1  │
+│ sdc10            │ utagsBackup       │ 259:0       │ 512           │ <1  │
+│ sdc11            │ logs              │ 259:0       │ 8192          │ 8   │
+│ sdc12            │ logks             │ 259:0       │ 65536         │ 64  │
+│ sdc13            │ carrier           │ 259:0       │ 16384         │ 16  │
+│ sdc14            │ vbmeta_a          │ 259:0       │ 8192          │ 8   │
+│ sdc15            │ vbmeta_system_a   │ 259:0       │ 8192          │ 8   │
+│ sdc16            │ vbmeta_b          │ 259:0       │ 8192          │ 8   │
+│ sdc17            │ vbmeta_system_b   │ 259:0       │ 8192          │ 8   │
+│ sdc18            │ metadata          │ 259:1       │ 65536         │ 64  │
+│ sdc19            │ sec1              │ 259:2       │ 2048          │ 2   │
+│ sdc20            │ proinfo           │ 259:3       │ 3072          │ 3   │
+│ sdc21            │ boot_para         │ 259:4       │ 1024          │ 1   │
+│ sdc22            │ dram_para         │ 259:5       │ 25600         │ 25  │
+│ sdc23            │ pad0              │ 259:6       │ 5984          │ 6   │
+│ sdc24            │ persist           │ 259:7       │ 49152         │ 48  │
+│ sdc25            │ prodpersist       │ 259:8       │ 8192          │ 8   │
+│ sdc26            │ hw                │ 259:9       │ 8192          │ 8   │
+│ sdc27            │ sp                │ 259:10      │ 8192          │ 8   │
+│ sdc28            │ efuse             │ 259:11      │ 8192          │ 8   │
+│ sdc29            │ efuseBackup       │ 259:12      │ 8192          │ 8   │
+│ sdc30            │ kpan              │ 259:13      │ 8192          │ 8   │
+│ sdc31            │ protect1          │ 259:14      │ 8192          │ 8   │
+│ sdc32            │ protect2          │ 259:15      │ 8192          │ 8   │
+│ sdc33            │ pad1              │ 259:16      │ 512           │ <1  │
+│ sdc34            │ seccfg            │ 259:17      │ 7680          │ 8   │
+│ sdc35            │ pad2              │ 259:18      │ 44032         │ 43  │
+│ sdc36            │ otp               │ 259:19      │ 131072        │ 128 │
+│ sdc37            │ pstore            │ 259:20      │ 5120          │ 5   │
+│ sdc38            │ pad3              │ 259:21      │ 204800        │ 200 │
+│ sdc39            │ md1img_a          │ 259:22      │ 1024          │ 1   │
+│ sdc40            │ spmfw_a           │ 259:23      │ 32768         │ 32  │
+│ sdc41            │ mcf_ota_a         │ 259:24      │ 1024          │ 1   │
+│ sdc42            │ pi_img_a          │ 259:25      │ 4096          │ 4   │
+│ sdc43            │ dpm_a             │ 259:26      │ 6144          │ 6   │
+│ sdc44            │ scp_a             │ 259:27      │ 6144          │ 6   │
+│ sdc45            │ vcp_a             │ 259:28      │ 1024          │ 1   │
+│ sdc46            │ sspm_a            │ 259:29      │ 1024          │ 1   │
+│ sdc47            │ mcupm_a           │ 259:30      │ 32768         │ 32  │
+│ sdc48            │ gz_a              │ 259:31      │ 16384         │ 16  │
+│ sdc49            │ lk_a              │ 259:32      │ 65536         │ 64  │
+│ sdc50            │ boot_a            │ 259:33      │ 65536         │ 64  │
+│ sdc51            │ vendor_boot_a     │ 259:34      │ 65536         │ 64  │
+│ sdc52            │ init_boot_a       │ 259:35      │ 8192          │ 8   │
+│ sdc53            │ dtbo_a            │ 259:36      │ 8192          │ 8   │
+│ sdc54            │ tzapp_a           │ 259:37      │ 16384         │ 16  │
+│ sdc55            │ tee_a             │ 259:38      │ 5120          │ 5   │
+│ sdc56            │ logo_a            │ 259:39      │ 16384         │ 16  │
+│ sdc57            │ connsys_bt_a      │ 259:40      │ 8192          │ 8   │
+│ sdc58            │ connsys_wifi_a    │ 259:41      │ 8192          │ 8   │
+│ sdc59            │ connsys_gnss_a    │ 259:42      │ 8192          │ 8   │
+│ sdc60            │ pad4              │ 259:43      │ 7168          │ 7   │
+│ sdc61            │ md1img_b          │ 259:44      │ 204800        │ 200 │
+│ sdc62            │ spmfw_b           │ 259:45      │ 1024          │ 1   │
+│ sdc63            │ mcf_ota_b         │ 259:46      │ 32768         │ 32  │
+│ sdc64            │ pi_img_b          │ 259:47      │ 1024          │ 1   │
+│ sdc65            │ dpm_b             │ 259:48      │ 4096          │ 4   │
+│ sdc66            │ scp_b             │ 259:49      │ 6144          │ 6   │
+│ sdc67            │ vcp_b             │ 259:50      │ 6144          │ 6   │
+│ sdc68            │ sspm_b            │ 259:51      │ 1024          │ 1   │
+│ sdc69            │ mcupm_b           │ 259:52      │ 1024          │ 1   │
+│ sdc70            │ gz_b              │ 259:53      │ 32768         │ 32  │
+│ sdc71            │ lk_b              │ 259:54      │ 16384         │ 16  │
+│ sdc72            │ boot_b            │ 259:55      │ 65536         │ 64  │
+│ sdc73            │ vendor_boot_b     │ 259:56      │ 65536         │ 64  │
+│ sdc74            │ connsys_bt_b      │ 259:57      │ 8192          │ 8   │
+│ sdc75            │ connsys_wifi_b    │ 259:58      │ 8192          │ 8   │
+│ sdc76            │ connsys_gnss_b    │ 259:59      │ 8192          │ 8   │
+│ sdc77            │ dtbo_b            │ 259:60      │ 8192          │ 8   │
+│ sdc78            │ tzapp_b           │ 259:61      │ 16384         │ 16  │
+│ sdc79            │ tee_b             │ 259:62      │ 5120          │ 5   │
+│ sdc80            │ logo_b            │ 259:63      │ 16384         │ 16  │
+│ sdc81            │ init_boot_b       │ 259:64      │ 8192          │ 8   │
+│ sdc82            │ pad5              │ 259:65      │ 7168          │ 7   │
+│ sdc83            │ super             │ 259:66      │ 8159232       │ 7968│
+│ sdc84            │ userdata          │ 259:67      │ 114900960     │~112G│
+│ sdc85            │ flashinfo         │ 259:68      │ 16384         │ 16  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+DYNAMIC PARTITIONS (within super partition - sdc83):
+────────────────────────────────────────────────────
+Super Partition Size: ~8 GB (8159232 blocks)
+
+Logical Partitions:
+├── system        (erofs/ext4, read-only)
+├── system_ext    (erofs/ext4, read-only)
+├── product       (erofs/ext4, read-only)
+├── vendor        (erofs/ext4, read-only)
+├── vendor_dlkm   (erofs/ext4, read-only)
+└── odm           (erofs/ext4, read-only)
+
+A/B SLOT CONFIGURATION:
+───────────────────────
+Active partitions that exist in both _a and _b variants:
+- boot (sdc50/sdc72)
+- init_boot (sdc52/sdc81)
+- vendor_boot (sdc51/sdc73)
+- dtbo (sdc53/sdc77)
+- vbmeta (sdc14/sdc16)
+- vbmeta_system (sdc15/sdc17)
+- lk (sdc49/sdc71)
+- logo (sdc56/sdc80)
+- tee (sdc55/sdc79)
+- tzapp (sdc54/sdc78)
+- md1img (sdc39/sdc61)
+- scp (sdc44/sdc66)
+- sspm (sdc46/sdc68)
+- dpm (sdc43/sdc65)
+- mcupm (sdc47/sdc69)
+- gz (sdc48/sdc70)
+- vcp (sdc45/sdc67)
+- spmfw (sdc40/sdc62)
+- mcf_ota (sdc41/sdc63)
+- pi_img (sdc42/sdc64)
+- connsys_wifi (sdc58/sdc75)
+- connsys_bt (sdc57/sdc74)
+- connsys_gnss (sdc59/sdc76)
+
+ADDITIONAL DEVICES:
+───────────────────
+sda  - 4 GB (4096 blocks) - Reserved
+sdb  - 4 GB (4096 blocks) - Reserved
+
+PRELOADER (Not in main partition table):
+─────────────────────────────────────────
+preloader_a: /dev/block/mmcblk0boot0
+preloader_b: /dev/block/mmcblk0boot1
+
+ZRAM:
+─────
+zram0: 3728656 KB (Dynamic, based on available RAM)
+
+================================================================================
+                    Partition Map Generated: 2025-11-04
+================================================================================

@@ -1,0 +1,15 @@
+# File contexts for Motorola Kansas
+
+# Block devices
+/dev/block/platform/soc/112b0000\.ufshci/by-name/boot_[ab]          u:object_r:boot_block_device:s0
+/dev/block/platform/soc/112b0000\.ufshci/by-name/init_boot_[ab]     u:object_r:boot_block_device:s0
+/dev/block/platform/soc/112b0000\.ufshci/by-name/vendor_boot_[ab]   u:object_r:boot_block_device:s0
+/dev/block/platform/soc/112b0000\.ufshci/by-name/recovery_[ab]      u:object_r:recovery_block_device:s0
+/dev/block/platform/soc/112b0000\.ufshci/by-name/metadata           u:object_r:metadata_block_device:s0
+/dev/block/platform/soc/112b0000\.ufshci/by-name/userdata           u:object_r:userdata_block_device:s0
+
+# Persist
+/mnt/vendor/persist(/.*)?                                           u:object_r:vendor_persist_type:s0
+
+# Motorola
+/vendor/bin/mmi-.*                                                  u:object_r:vendor_mmi_exec:s0
