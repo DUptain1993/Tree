@@ -67,25 +67,22 @@ jobs:
             zip zlib1g-dev python3 python-is-python3 \
             openjdk-11-jdk adb fastboot
 
-      - name: Setup Repo Tool
+      - name: Setup Git Config
         run: |
-          mkdir -p ~/bin
-          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-          chmod a+x ~/bin/repo
-          echo "$HOME/bin" >> $GITHUB_PATH
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      - name: Initialize TWRP Repo
+      - name: Initialize and Sync TWRP Repo
+        env:
+          REPO_BIN: $HOME/bin/repo
         run: |
-          mkdir -p ~/twrp
-          cd ~/twrp
-          repo init --depth=1 -u ${{ env.MANIFEST }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
-
-      - name: Sync TWRP Source
-        run: |
-          cd ~/twrp
-          repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+          mkdir -p ~/bin
+          chmod +x ./ci/init_repo.sh
+          ./ci/init_repo.sh \
+            "${{ env.MANIFEST }}" \
+            "${{ github.event.inputs.MANIFEST_BRANCH }}" \
+            "$HOME/twrp" \
+            "$(nproc --all)"
 
       - name: Clone Device Tree
         run: |
