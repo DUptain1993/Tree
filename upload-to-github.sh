@@ -26,8 +26,8 @@ GITHUB_REPO="Tree"
 # The workflow file to trigger
 WORKFLOW_FILE="build-twrp.yml"
 # The branch of the TWRP manifest to use for building
-# Recommended: "android-14.0" (stable) or "android-15.0" (if available)
-MANIFEST_BRANCH="android-14.0"
+# Corrected to use the available 'twrp-14.1' branch format
+MANIFEST_BRANCH="twrp-14.1"
 
 # --- Script Logic ---
 
