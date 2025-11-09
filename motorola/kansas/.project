@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!--
+      This file defines the remote repositories needed to build TWRP for this device.
+      The build system will automatically clone these into the correct paths.
+    -->
+
+    <!-- Remote server hosting the repositories -->
+    <remote name="github-personal" fetch="https://github.com/DUptain1993/" />
+
+    <!--
+      Kernel Repository
+      This provides the prebuilt kernel (Image.gz), dtb, and dtbo.img.
+      The BoardConfig.mk points to files inside this repository.
+      Change the repository name if you host it elsewhere.
+    -->
+    <project path="device/motorola/kansas/prebuilt" name="android_kernel_motorola_kansas" remote="github-personal" revision="main" />
+
+    <!--
+      Vendor Blobs Repository
+      This provides the proprietary files needed for hardware to function correctly.
+      It's cloned into the 'vendor/motorola/kansas' directory.
+      Change the repository name if you host it elsewhere.
+    -->
+    <project path="vendor/motorola/kansas" name="android_vendor_motorola_kansas" remote="github-personal" revision="main" />
+
+</manifest>
