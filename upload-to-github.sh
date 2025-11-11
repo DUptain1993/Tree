@@ -53,7 +53,7 @@ if ! gh auth status &> /dev/null; then
     echo "Please run 'gh auth login' to authenticate."
     exit 1
 fi
-echo "Successfully authenticated as '$(gh auth status -h github.com | awk '/Logged in to github.com as/ {print $6}')'."
+echo "Successfully authenticated as '$(gh api user --jq .login)'."
 
 # 3. Trigger the workflow
 print_message "Triggering the build workflow"
