@@ -61,7 +61,7 @@ if echo "$AVAILABLE_BRANCHES" | grep -q "^${DESIRED_BRANCH}$"; then
 else
     echo "Desired branch '${DESIRED_BRANCH}' not found. Searching for the best fallback."
     # Filter for twrp- branches, sort them by version, and get the latest one
-    BEST_FALLBACK=$(echo "$AVAILABLE_BRANCHES" | grep '^twrp-' | sort -V | tail -n 1)
+    BEST_FALLBACK=$(echo "$AVAILABLE_BRANCHES" | grep '^twrp-' || true | sort -V | tail -n 1)
     if [ -n "$BEST_FALLBACK" ]; then
         FINAL_BRANCH="$BEST_FALLBACK"
         echo "Using best fallback branch: ${FINAL_BRANCH}"
