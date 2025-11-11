@@ -44,6 +44,10 @@ echo "Using repo command at: $REPO_BIN"
 # --- Branch Selection Logic ---
 echo "Querying available branches from manifest repo: $MANIFEST_URL"
 AVAILABLE_BRANCHES=$(git ls-remote --heads "$MANIFEST_URL" | cut -f2 | sed 's#refs/heads/##')
+if [ $? -ne 0 ] || [ -z "$AVAILABLE_BRANCHES" ]; then
+    echo "ERROR: Failed to query branches from manifest repo at $MANIFEST_URL" >&2
+    exit 1
+fi
 echo "Available branches from manifest:"
 echo "$AVAILABLE_BRANCHES"
 
